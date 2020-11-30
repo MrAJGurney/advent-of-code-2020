@@ -10,6 +10,6 @@ Put the `input.txt` file from advent of code into `puzzles/[DAY]`
 
 - e.g. `puzzles/01/input.txt`
 
-Run `node advent-of-code [DAY] [STAR-NUMBER]`
+Run `npx ts-node advent-of-code [DAY] [STAR-NUMBER]`
 
-- e.g. `node advent-of-code 1 2`
+- e.g. `npx ts-node advent-of-code 1 2`

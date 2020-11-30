@@ -1,16 +1,38 @@
-const puzzles = require('./puzzles/puzzles');
-const { validateDay, validateStar, } = require('./cliTool/arg-validator');
+import {
+	isStringDefined,
+	PuzzleSolver,
+	isPuzzleSolverDefined
+} from './advent-of-code.types';
 
-const adventOfCode = async () => {
+import puzzles from './puzzles';
+import { validateDay, validateStar } from './cliTool/arg-validator';
+
+const adventOfCode = () => {
 	const args = process.argv.slice(2);
-	const [day, star, ] = args;
+	const [rawDay, rawStar, ] = args;
 
-	validateDay(day);
-	validateStar(star);
+	const day = validateDay(rawDay);
+	const star = validateStar(rawStar);
 
-	const solver = puzzles[day].stars[star];
-	const title = puzzles[day].title;
-	const { solution, executionTime, } = await solveWithExecutionTime(solver);
+	const solver: PuzzleSolver | undefined = puzzles?.[day]?.stars?.[star];
+	const title: string | undefined = puzzles?.[day]?.title;
+
+	if (!isPuzzleSolverDefined(solver)) {
+		throw new Error(
+			`No solution for day ${day} and star ${star}`
+		);
+	}
+
+	if (!isStringDefined(title)) {
+		throw new Error(
+			`Missing title for day ${day}`
+		);
+	}
+
+	const {
+		solution,
+		executionTime,
+	} = solveWithExecutionTime(solver);
 
 	/* eslint-disable no-console */
 	console.log(
@@ -31,9 +53,22 @@ const adventOfCode = async () => {
 	/* eslint-enable no-console */
 };
 
-const solveWithExecutionTime = async solver => {
+interface ExecutionTime {
+	minutes: number;
+	seconds: number;
+	milliseconds: number;
+	microseconds: number;
+	nanoseconds: number;
+}
+
+const solveWithExecutionTime = (
+	solver: PuzzleSolver
+): {
+	solution: string
+	executionTime: ExecutionTime
+} => {
 	const highResolutionTimeStart = process.hrtime();
-	const solution = await solver();
+	const solution = solver();
 	const [seconds, nanoseconds, ] = process.hrtime(highResolutionTimeStart);
 	const totalElapsedNanoseconds = seconds * Math.pow(1000, 3) + nanoseconds;
 	const totalElapsedMicroseconds = Math.round(
