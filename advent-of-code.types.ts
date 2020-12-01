@@ -4,6 +4,12 @@ export const isStringDefined = (
 	text !== undefined
 );
 
+export const isNumberDefined = (
+	number: number | undefined
+): number is Exclude<typeof number, undefined> => (
+	number !== undefined
+);
+
 export type PuzzleSolver = () => string;
 
 export const isPuzzleSolverDefined = (
