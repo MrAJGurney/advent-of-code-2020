@@ -1,16 +1,14 @@
-import {
-	PuzzleSolver,
-	Stars,
-	isNumberDefined
-} from '../../advent-of-code.types';
-import { ExpenseReport } from './report-repair.types';
+import { ExpenseReport } from './types';
+import { PuzzleSolver, Stars } from '../../types';
+
+import { isNumberDefined } from '../../utils/is-defined';
 
 import fs from 'fs';
 import path from 'path';
 
 const solveFirstPuzzle: PuzzleSolver = () => {
-	const fileContents = readFile();
-	const expenseReport: ExpenseReport = formatExpenseReport(fileContents);
+	const puzzleInput = readPuzzleInput();
+	const expenseReport: ExpenseReport = formatPuzzleInput(puzzleInput);
 
 	for (let i = 0; i < expenseReport.length; i++) {
 		for (let j = i; j < expenseReport.length; j++) {
@@ -39,12 +37,12 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
-	const fileContents = readFile();
-	const expenseReport: ExpenseReport = formatExpenseReport(fileContents);
+	const puzzleInput = readPuzzleInput();
+	const expenseReport: ExpenseReport = formatPuzzleInput(puzzleInput);
 
 	for (let i = 0; i < expenseReport.length; i++) {
-		for (let j = i+1; j < expenseReport.length; j++) {
-			for (let k = j+1; k < expenseReport.length; k++) {
+		for (let j = i + 1; j < expenseReport.length; j++) {
+			for (let k = j + 1; k < expenseReport.length; k++) {
 				const firstExpense = expenseReport[i];
 				const secondExpense = expenseReport[j];
 				const thirdExpense = expenseReport[k];
@@ -67,7 +65,7 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 					);
 				}
 
-				if (firstExpense + secondExpense +thirdExpense === 2020) {
+				if (firstExpense + secondExpense + thirdExpense === 2020) {
 					return (
 						firstExpense * secondExpense * thirdExpense
 					).toString();
@@ -79,16 +77,18 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 	throw new Error('Unable to find solution');
 };
 
-const readFile = (): string => {
+const readPuzzleInput = (): string => {
 	const inputFile = 'input.txt';
 	const filePath = path.join(__dirname, inputFile);
 	const fileContents = fs.readFileSync(filePath, 'utf-8');
 	return fileContents;
 };
 
-const formatExpenseReport = (fileContents: string): ExpenseReport => {
-	const expensesAsText = fileContents.trim().split('\n');
-	const expensesAsNumbers = expensesAsText.map(expense => parseInt(expense));
+const formatPuzzleInput = (puzzleInput: string): ExpenseReport => {
+	const expensesAsText: string[] = puzzleInput.trim().split('\n');
+	const expensesAsNumbers: number[] = expensesAsText.map(
+		expense => parseInt(expense)
+	);
 	return expensesAsNumbers;
 };
 

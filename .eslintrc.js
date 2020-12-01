@@ -3,7 +3,8 @@ const underscoreOnlyPattern = '^_$';
 // '_': Underscore character
 // '$': End of line
 
-const configuration = 	{ root: true,
+const configuration = {
+	root: true,
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint', ],
 	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', ],
@@ -60,6 +61,7 @@ const rules = {
 	'prefer-const': ['error', ],
 	quotes: ['error', 'single', ],
 	semi: ['error', 'always', ],
+	'space-infix-ops': ['error', ],
 };
 
 module.exports = {

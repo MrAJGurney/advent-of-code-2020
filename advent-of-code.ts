@@ -1,11 +1,8 @@
-import {
-	isStringDefined,
-	PuzzleSolver,
-	isPuzzleSolverDefined
-} from './advent-of-code.types';
+import { PuzzleSolver } from './types';
 
 import puzzles from './puzzles';
-import { validateDay, validateStar } from './cliTool/arg-validator';
+import { validateDay, validateStar } from './utils/arg-validator';
+import { isPuzzleSolverDefined, isStringDefined } from './utils/is-defined';
 
 const adventOfCode = () => {
 	const args = process.argv.slice(2);

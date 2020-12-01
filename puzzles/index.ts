@@ -1,4 +1,4 @@
-import { Year } from '../advent-of-code.types';
+import { Year } from '../types';
 
 import day01 from './01';
 

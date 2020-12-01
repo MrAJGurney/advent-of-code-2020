@@ -1,4 +1,4 @@
-import { isStringDefined } from '../advent-of-code.types';
+import { isStringDefined } from './is-defined';
 
 export const validateDay = (day: string | undefined): number => {
 	const min = 1;
