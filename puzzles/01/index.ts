@@ -2,12 +2,10 @@ import { ExpenseReport } from './types';
 import { PuzzleSolver, Stars } from '../../types';
 
 import { isNumberDefined } from '../../utils/is-defined';
-
-import fs from 'fs';
-import path from 'path';
+import readPuzzleInput from '../common/read-puzzle-input';
 
 const solveFirstPuzzle: PuzzleSolver = () => {
-	const puzzleInput = readPuzzleInput();
+	const puzzleInput = readPuzzleInput(__dirname);
 	const expenseReport: ExpenseReport = formatPuzzleInput(puzzleInput);
 
 	for (let i = 0; i < expenseReport.length; i++) {
@@ -37,7 +35,7 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
-	const puzzleInput = readPuzzleInput();
+	const puzzleInput = readPuzzleInput(__dirname);
 	const expenseReport: ExpenseReport = formatPuzzleInput(puzzleInput);
 
 	for (let i = 0; i < expenseReport.length; i++) {
@@ -75,13 +73,6 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 	}
 
 	throw new Error('Unable to find solution');
-};
-
-const readPuzzleInput = (): string => {
-	const inputFile = 'input.txt';
-	const filePath = path.join(__dirname, inputFile);
-	const fileContents = fs.readFileSync(filePath, 'utf-8');
-	return fileContents;
 };
 
 const formatPuzzleInput = (puzzleInput: string): ExpenseReport => {

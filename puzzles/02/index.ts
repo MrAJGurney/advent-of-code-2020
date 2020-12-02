@@ -2,12 +2,10 @@ import { PasswordWithSledPolicy, PasswordWithTobogganPolicy } from './types';
 import { PuzzleSolver, Stars } from '../../types';
 
 import { isStringDefined, isNumberDefined } from '../../utils/is-defined';
-
-import fs from 'fs';
-import path from 'path';
+import readPuzzleInput from '../common/read-puzzle-input';
 
 const solveFirstPuzzle: PuzzleSolver = () => {
-	const puzzleInput = readPuzzleInput();
+	const puzzleInput = readPuzzleInput(__dirname);
 	const passwordsWithPolicy =
 		formaPuzzleInputAsSledPasswordValidation(puzzleInput);
 
@@ -18,7 +16,7 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
-	const puzzleInput = readPuzzleInput();
+	const puzzleInput = readPuzzleInput(__dirname);
 	const passwordsWithPolicy =
 		formaPuzzleInputAsTobogganPasswordValidation(puzzleInput);
 
@@ -28,13 +26,6 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 		)
 		.length
 		.toString();
-};
-
-const readPuzzleInput = (): string => {
-	const inputFile = 'input.txt';
-	const filePath = path.join(__dirname, inputFile);
-	const fileContents = fs.readFileSync(filePath, 'utf-8');
-	return fileContents;
 };
 
 const formaPuzzleInputAsSledPasswordValidation = (
