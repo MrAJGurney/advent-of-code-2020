@@ -7,7 +7,7 @@ import readPuzzleInput from '../common/read-puzzle-input';
 const solveFirstPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
 	const passwordsWithPolicy =
-		formaPuzzleInputAsSledPasswordValidation(puzzleInput);
+		formatPuzzleInputAsSledPasswordValidation(puzzleInput);
 
 	return passwordsWithPolicy
 		.filter(passwordWithPolicy => isValidSledPassword(passwordWithPolicy))
@@ -18,7 +18,7 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 const solveSecondPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
 	const passwordsWithPolicy =
-		formaPuzzleInputAsTobogganPasswordValidation(puzzleInput);
+		formatPuzzleInputAsTobogganPasswordValidation(puzzleInput);
 
 	return passwordsWithPolicy
 		.filter(
@@ -28,7 +28,7 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 		.toString();
 };
 
-const formaPuzzleInputAsSledPasswordValidation = (
+const formatPuzzleInputAsSledPasswordValidation = (
 	puzzleInput: string
 ): PasswordWithSledPolicy[] => (
 	puzzleInput
@@ -83,22 +83,22 @@ const isValidSledPassword = ({
 	password,
 	policy,
 }: PasswordWithSledPolicy): boolean => {
-	const characterOccurences = (
+	const characterOccurrences = (
 		password.match((new RegExp(policy.character, 'g'))) || []
 	).length;
 
-	if(characterOccurences > policy.max) {
+	if(characterOccurrences > policy.max) {
 		return false;
 	}
 
-	if(characterOccurences < policy.min) {
+	if(characterOccurrences < policy.min) {
 		return false;
 	}
 
 	return true;
 };
 
-const formaPuzzleInputAsTobogganPasswordValidation = (
+const formatPuzzleInputAsTobogganPasswordValidation = (
 	puzzleInput: string
 ): PasswordWithTobogganPolicy[] => (
 	puzzleInput
