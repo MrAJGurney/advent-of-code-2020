@@ -1,4 +1,4 @@
-import { isStringDefined } from './is-defined';
+import isDefined from './is-defined';
 
 export const validateDay = (day: string | undefined): number => {
 	const min = 1;
@@ -22,7 +22,7 @@ const validateArg = (
 		`${argName} must be an integer between ${min} and ${max} inclusive. Incorrect value: ${argValue}`
 	);
 
-	if(!isStringDefined(argValue)) {
+	if(!isDefined(argValue)) {
 		throw invalidArg;
 	}
 

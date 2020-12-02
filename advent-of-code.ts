@@ -2,7 +2,7 @@ import { PuzzleSolver } from './types';
 
 import puzzles from './puzzles';
 import { validateDay, validateStar } from './utils/arg-validator';
-import { isPuzzleSolverDefined, isStringDefined } from './utils/is-defined';
+import isDefined from './utils/is-defined';
 
 const adventOfCode = () => {
 	const args = process.argv.slice(2);
@@ -14,13 +14,13 @@ const adventOfCode = () => {
 	const solver: PuzzleSolver | undefined = puzzles?.[day]?.stars?.[star];
 	const title: string | undefined = puzzles?.[day]?.title;
 
-	if (!isPuzzleSolverDefined(solver)) {
+	if (!isDefined(solver)) {
 		throw new Error(
 			`No solution for day ${day} and star ${star}`
 		);
 	}
 
-	if (!isStringDefined(title)) {
+	if (!isDefined(title)) {
 		throw new Error(
 			`Missing title for day ${day}`
 		);

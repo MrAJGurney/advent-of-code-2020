@@ -1,5 +1,5 @@
 import { PasswordWithSledPolicy } from './types';
-import { isStringDefined, isNumberDefined } from '../../utils/is-defined';
+import isDefined from '../../utils/is-defined';
 
 export const buildPasswordsWithSledPolicy = (
 	puzzleInput: string
@@ -9,35 +9,35 @@ export const buildPasswordsWithSledPolicy = (
 		.split('\n')
 		.map(line => {
 			const [policy, password, ] = line.split(': ');
-			if(!isStringDefined(policy)) {
+			if (!isDefined(policy)) {
 				throw new Error(`Policy is undefined for line ${line}`);
 			}
-			if(!isStringDefined(password)) {
+			if (!isDefined(password)) {
 				throw new Error(`Password is undefined for line ${line}`);
 			}
 
 			const [range, character, ] = policy.split(' ');
-			if(!isStringDefined(range)) {
+			if (!isDefined(range)) {
 				throw new Error(`Range is undefined for line ${line}`);
 			}
-			if(!isStringDefined(character)) {
+			if (!isDefined(character)) {
 				throw new Error(`Character is undefined for line ${line}`);
 			}
 
 			const [rawMin, rawMax, ] = range.split('-');
-			if(!isStringDefined(rawMin)) {
+			if (!isDefined(rawMin)) {
 				throw new Error(`Min is undefined for line ${line}`);
 			}
-			if(!isStringDefined(rawMax)) {
+			if (!isDefined(rawMax)) {
 				throw new Error(`Max is undefined for line ${line}`);
 			}
 
 			const min = parseInt(rawMin);
 			const max = parseInt(rawMax);
-			if(!isNumberDefined(min)) {
+			if (!isDefined(min)) {
 				throw new Error(`Min is an invalid number for line ${line}`);
 			}
-			if(!isNumberDefined(max)) {
+			if (!isDefined(max)) {
 				throw new Error(`Max is an invalid number for line ${line}`);
 			}
 
@@ -60,11 +60,11 @@ export const isValidSledPassword = ({
 		password.match((new RegExp(policy.character, 'g'))) || []
 	).length;
 
-	if(characterOccurrences > policy.max) {
+	if (characterOccurrences > policy.max) {
 		return false;
 	}
 
-	if(characterOccurrences < policy.min) {
+	if (characterOccurrences < policy.min) {
 		return false;
 	}
 

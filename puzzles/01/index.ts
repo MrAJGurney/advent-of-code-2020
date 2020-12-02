@@ -1,7 +1,7 @@
 import { ExpenseReport } from './types';
 import { PuzzleSolver, Stars } from '../../types';
 
-import { isNumberDefined } from '../../utils/is-defined';
+import isDefined from '../../utils/is-defined';
 import readPuzzleInput from '../common/read-puzzle-input';
 
 const solveFirstPuzzle: PuzzleSolver = () => {
@@ -12,13 +12,13 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 		for (let j = i; j < expenseReport.length; j++) {
 			const firstExpense = expenseReport[i];
 			const secondExpense = expenseReport[j];
-			if(!isNumberDefined(firstExpense)) {
+			if (!isDefined(firstExpense)) {
 				throw new Error(
 					/* eslint-disable-next-line max-len */
 					`Unexpected value at position ${i} in array length ${expenseReport.length}: ${firstExpense}`
 				);
 			}
-			if(!isNumberDefined(secondExpense)) {
+			if (!isDefined(secondExpense)) {
 				throw new Error(
 					/* eslint-disable-next-line max-len */
 					`Unexpected value at position ${j} in array length ${expenseReport.length}: ${secondExpense}`
@@ -44,19 +44,19 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 				const firstExpense = expenseReport[i];
 				const secondExpense = expenseReport[j];
 				const thirdExpense = expenseReport[k];
-				if(!isNumberDefined(firstExpense)) {
+				if (!isDefined(firstExpense)) {
 					throw new Error(
 						/* eslint-disable-next-line max-len */
 						`Unexpected value at position ${i} in array length ${expenseReport.length}: ${firstExpense}`
 					);
 				}
-				if(!isNumberDefined(secondExpense)) {
+				if (!isDefined(secondExpense)) {
 					throw new Error(
 						/* eslint-disable-next-line max-len */
 						`Unexpected value at position ${j} in array length ${expenseReport.length}: ${secondExpense}`
 					);
 				}
-				if(!isNumberDefined(thirdExpense)) {
+				if (!isDefined(thirdExpense)) {
 					throw new Error(
 						/* eslint-disable-next-line max-len */
 						`Unexpected value at position ${k} in array length ${expenseReport.length}: ${thirdExpense}`

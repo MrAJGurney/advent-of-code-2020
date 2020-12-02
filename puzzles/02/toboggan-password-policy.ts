@@ -1,5 +1,5 @@
 import { PasswordWithTobogganPolicy } from './types';
-import { isStringDefined, isNumberDefined } from '../../utils/is-defined';
+import isDefined from '../../utils/is-defined';
 
 export const buildPasswordsWithTobogganPolicy = (
 	puzzleInput: string
@@ -9,36 +9,36 @@ export const buildPasswordsWithTobogganPolicy = (
 		.split('\n')
 		.map(line => {
 			const [policy, password, ] = line.split(': ');
-			if(!isStringDefined(policy)) {
+			if (!isDefined(policy)) {
 				throw new Error(`Policy is undefined for line ${line}`);
 			}
-			if(!isStringDefined(password)) {
+			if (!isDefined(password)) {
 				throw new Error(`Password is undefined for line ${line}`);
 			}
 
 			const [range, character, ] = policy.split(' ');
-			if(!isStringDefined(range)) {
+			if (!isDefined(range)) {
 				throw new Error(`Range is undefined for line ${line}`);
 			}
-			if(!isStringDefined(character)) {
+			if (!isDefined(character)) {
 				throw new Error(`Character is undefined for line ${line}`);
 			}
 
 			const [rawIndexA, rawIndexB, ] = range.split('-');
-			if(!isStringDefined(rawIndexA)) {
+			if (!isDefined(rawIndexA)) {
 				throw new Error(`IndexA is undefined for line ${line}`);
 			}
-			if(!isStringDefined(rawIndexB)) {
+			if (!isDefined(rawIndexB)) {
 				throw new Error(`IndexB is undefined for line ${line}`);
 			}
 
 			const indexA = parseInt(rawIndexA) - 1;
 			const indexB = parseInt(rawIndexB) - 1;
-			if(!isNumberDefined(indexA)) {
+			if (!isDefined(indexA)) {
 				/* eslint-disable-next-line max-len */
 				throw new Error(`IndexA is an invalid number for line ${line}`);
 			}
-			if(!isNumberDefined(indexB)) {
+			if (!isDefined(indexB)) {
 				/* eslint-disable-next-line max-len */
 				throw new Error(`IndexB is an invalid number for line ${line}`);
 			}
