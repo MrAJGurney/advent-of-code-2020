@@ -1,6 +1,5 @@
 import { Passport, PassportKey } from './types';
 
-import { newlineOrSpace } from '../common/regex';
 import isDefined from '../../utils/is-defined';
 import { PASSPORT } from './constants';
 
@@ -10,6 +9,7 @@ export const buildPassports = (puzzleInput: string): Passport[] => {
 };
 
 const buildPassport = (rawPassport: string): Passport => {
+	const newlineOrSpace = /[\n| ]/;
 	const passportParams = rawPassport.split(newlineOrSpace);
 
 	return passportParams.reduce((passport: Passport, param) => {

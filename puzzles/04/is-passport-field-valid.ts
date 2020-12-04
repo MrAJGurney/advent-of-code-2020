@@ -1,8 +1,9 @@
 import isDefined from '../../utils/is-defined';
-import { onlyDigits, onlyDigitsAndLowercaseLetters } from '../common/regex';
+import {
+	containsOnlyDigits,
+	containsOnlyDigitsAndLowercaseLetters
+} from '../common/contains-ony';
 import { PASSPORT } from './constants';
-
-const containsOnlyDigits = (text: string): boolean => onlyDigits.test(text);
 
 export const isValidBirthYear = (birthYear: string | undefined): boolean => {
 	// byr (Birth Year) - four digits; at least 1920 and at most 2002.
@@ -75,7 +76,9 @@ export const isValidHairColor = (hairColor: string | undefined): boolean => {
 	if (!isDefined(hairColor)) return false;
 	if (hairColor.length !== 7) return false;
 	if (hairColor[0] !== '#') return false;
-	if (!onlyDigitsAndLowercaseLetters.test(hairColor.slice(1))) return false;
+	if (!containsOnlyDigitsAndLowercaseLetters(hairColor.slice(1))) {
+		return false;
+	}
 
 	return true;
 };
