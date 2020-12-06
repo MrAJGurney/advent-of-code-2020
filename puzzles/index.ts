@@ -5,6 +5,7 @@ import day02 from './02';
 import day03 from './03';
 import day04 from './04';
 import day05 from './05';
+import day06 from './06';
 
 const year: Year = {
 	'1': {
@@ -26,6 +27,10 @@ const year: Year = {
 	'5': {
 		title: 'Day 5: Binary Boarding',
 		stars: day05,
+	},
+	'6': {
+		title: 'Day 6: Custom Customs',
+		stars: day06,
 	},
 };
 
