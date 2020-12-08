@@ -54,7 +54,8 @@ const rules = {
 			ignoreComments: false,
 		},
 	],
-	'no-unused-vars': [
+	'no-unused-vars': 'off',
+	'@typescript-eslint/no-unused-vars': [
 		'error', { varsIgnorePattern: underscoreOnlyPattern, },
 	],
 	'no-var': ['error', ],

@@ -7,6 +7,7 @@ import day04 from './04';
 import day05 from './05';
 import day06 from './06';
 import day07 from './07';
+import day08 from './08';
 
 const year: Year = {
 	'1': {
@@ -36,6 +37,10 @@ const year: Year = {
 	'7': {
 		title: 'Day 7: Handy Haversacks',
 		stars: day07,
+	},
+	'8': {
+		title: 'Day 8: Handheld Halting',
+		stars: day08,
 	},
 };
 
