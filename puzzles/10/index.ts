@@ -1,7 +1,7 @@
 import { PuzzleSolver, Stars } from '../../types';
 
 import readPuzzleInput from '../common/read-puzzle-input';
-import isDefined from '../../utils/is-defined';
+import guaranteeDefined from './guarantee-defined';
 
 type JoltDifferenceDistribution = {
 	[difference: string]: number;
@@ -13,10 +13,7 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 		.trim()
 		.split('\n')
 		.map(rawJolt => {
-			if (!isDefined(rawJolt)) {
-				throw new Error('Undefined jolt rating');
-			}
-			const jolt = parseInt(rawJolt);
+			const jolt = parseInt(guaranteeDefined(rawJolt).trim());
 			return jolt;
 		})
 		.sort((a, b) => a - b);
@@ -30,20 +27,19 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 				ascendingJoltRatings: number[]
 			) => {
 				const previousAdaptorJoltRating =
-					index === 0 ? 0 : ascendingJoltRatings[index - 1];
-				if (!isDefined(previousAdaptorJoltRating)) {
-					throw new Error('Undefined jolt rating');
-				}
+					index === 0 ?
+						0 :
+						guaranteeDefined(ascendingJoltRatings[index - 1]);
 
-				const distributionKey =
-					(adaptorJoltRating - previousAdaptorJoltRating).toString();
+				const distributionKey = (
+					adaptorJoltRating - previousAdaptorJoltRating
+				).toString();
 
 				if (distribution[distributionKey] === undefined) {
 					distribution[distributionKey] = 0;
 				}
 
-				++distribution[
-					(adaptorJoltRating - previousAdaptorJoltRating).toString()];
+				++distribution[distributionKey];
 				return distribution;
 			}, {}
 		);
@@ -60,7 +56,59 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
-	throw new Error('TODO');
+	const puzzleInput = readPuzzleInput(__dirname);
+
+	const ascendingJoltRatings: number[] = puzzleInput
+		.trim()
+		.split('\n')
+		.map(rawJolt => {
+			const jolt = parseInt(guaranteeDefined(rawJolt.trim()));
+			return jolt;
+		})
+		.sort((a, b) => a - b);
+
+	const joltStepFromPrevious: number[] = ascendingJoltRatings
+		.map((joltRating, index, ascendingJoltRatings) => {
+			const previousJoltRating = guaranteeDefined(
+				index === 0 ? 0 : ascendingJoltRatings[index - 1]
+			);
+			return joltRating - previousJoltRating;
+		});
+
+	const consecutiveAdjacentsCount: number[] = joltStepFromPrevious
+		.reduce(
+			(
+				consecutiveAdjacentsCount,
+				step
+			) => {
+				if (step === 1) {
+					consecutiveAdjacentsCount[0]++;
+					return consecutiveAdjacentsCount;
+				}
+
+				if (step === 3) {
+					consecutiveAdjacentsCount.unshift(0);
+					return consecutiveAdjacentsCount;
+				}
+
+				throw new Error('Unexpected step size');
+			}, [0, ]
+		)
+		.filter(count => count !== 0)
+		.reverse();
+
+	return consecutiveAdjacentsCount
+		.map(count => {
+			switch (count) {
+			case 1: return 1;
+			case 2: return 2;
+			case 3: return 4;
+			case 4: return 7;
+			default: return 0;
+			}
+		})
+		.reduce((product: number, count: number) => (product * count), 1)
+		.toString();
 };
 
 const stars: Stars = {
