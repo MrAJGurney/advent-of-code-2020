@@ -9,6 +9,7 @@ import day06 from './06';
 import day07 from './07';
 import day08 from './08';
 import day09 from './09';
+import day10 from './10';
 
 const year: Year = {
 	'1': {
@@ -46,6 +47,10 @@ const year: Year = {
 	'9': {
 		title: 'Day 9: Encoding Error',
 		stars: day09,
+	},
+	'10': {
+		title: 'Day 10: Adapter Array',
+		stars: day10,
 	},
 };
 
