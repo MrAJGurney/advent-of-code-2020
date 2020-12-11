@@ -10,6 +10,7 @@ import day07 from './07';
 import day08 from './08';
 import day09 from './09';
 import day10 from './10';
+import day11 from './11';
 
 const year: Year = {
 	'1': {
@@ -51,6 +52,10 @@ const year: Year = {
 	'10': {
 		title: 'Day 10: Adapter Array',
 		stars: day10,
+	},
+	'11': {
+		title: 'Day 11: Seating System',
+		stars: day11,
 	},
 };
 

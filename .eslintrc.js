@@ -45,6 +45,7 @@ const rules = {
 	'linebreak-style': ['error', 'unix', ],
 	'max-len': ['error', { code: 80, }, ],
 	'no-console': ['error', ],
+	'no-constant-condition': ['error', { 'checkLoops': false, }, ],
 	'no-multi-spaces': ['error', ],
 	'no-multiple-empty-lines': ['error', { max: 1, }, ],
 	'no-trailing-spaces': [

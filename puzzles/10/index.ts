@@ -1,7 +1,7 @@
 import { PuzzleSolver, Stars } from '../../types';
 
 import readPuzzleInput from '../common/read-puzzle-input';
-import guaranteeDefined from './guarantee-defined';
+import guaranteeDefined from '../common/guarantee-defined';
 
 type JoltDifferenceDistribution = {
 	[difference: string]: number;
@@ -57,25 +57,20 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 
 const solveSecondPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
-
-	const ascendingJoltRatings: number[] = puzzleInput
+	return puzzleInput
 		.trim()
 		.split('\n')
 		.map(rawJolt => {
 			const jolt = parseInt(guaranteeDefined(rawJolt.trim()));
 			return jolt;
 		})
-		.sort((a, b) => a - b);
-
-	const joltStepFromPrevious: number[] = ascendingJoltRatings
+		.sort((a, b) => a - b)
 		.map((joltRating, index, ascendingJoltRatings) => {
 			const previousJoltRating = guaranteeDefined(
 				index === 0 ? 0 : ascendingJoltRatings[index - 1]
 			);
 			return joltRating - previousJoltRating;
-		});
-
-	const consecutiveAdjacentsCount: number[] = joltStepFromPrevious
+		})
 		.reduce(
 			(
 				consecutiveAdjacentsCount,
@@ -95,9 +90,6 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 			}, [0, ]
 		)
 		.filter(count => count !== 0)
-		.reverse();
-
-	return consecutiveAdjacentsCount
 		.map(count => {
 			switch (count) {
 			case 1: return 1;
