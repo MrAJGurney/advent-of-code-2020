@@ -1,47 +1,13 @@
 import { PuzzleSolver, Stars } from '../../types';
+import { Instruction, Action, ShipStatus } from './types';
 
 import readPuzzleInput from '../common/read-puzzle-input';
-import guaranteeDefined from '../common/guarantee-defined';
-
-enum Action {
-	MoveNorth = 'N',
-	MoveSouth = 'S',
-	MoveEast = 'E',
-	MoveWest = 'W',
-	TurnLeft = 'L',
-	TurnRight = 'R',
-	MoveForward = 'F'
-}
-
-type Instruction = {
-	action: Action;
-	value: number;
-}
-
-type Coordinates = {
-	north: number;
-	east: number;
-}
-
-type ShipStatus = {
-	coordinates: Coordinates,
-	facing: Coordinates,
-}
+import parseInstructions from './parse-instructions';
+import rotate from './rotate';
 
 const solveFirstPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
-	const instructions: Instruction[] = puzzleInput
-		.trim()
-		.split('\n')
-		.map(instruction => {
-			const rawAction = guaranteeDefined(instruction[0]);
-			const rawValue = guaranteeDefined(instruction.slice(1));
-
-			return {
-				action: parseAction(rawAction),
-				value: parseInt(rawValue),
-			};
-		});
+	const instructions: Instruction[] = parseInstructions(puzzleInput);
 
 	const { coordinates:{ north, east, }, } = instructions.reduce((
 		shipStatus,
@@ -88,55 +54,6 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 
 const solveSecondPuzzle: PuzzleSolver = () => {
 	throw new Error('todo');
-};
-
-const parseAction = (text: string): Action => {
-	switch (text) {
-	case Action.MoveNorth:
-	case Action.MoveSouth:
-	case Action.MoveEast:
-	case Action.MoveWest:
-	case Action.TurnLeft:
-	case Action.TurnRight:
-	case Action.MoveForward:
-		return text;
-	default:
-		throw new Error('Unexpected action');
-	}
-};
-
-const rotate = (angle: number, oldFacing: Coordinates): Coordinates => {
-	if (angle % 90 !== 0) {
-		throw new Error('Unexpected angle');
-	}
-
-	const ninetyDegreeRotationCount = angle / 90;
-
-	const facing = { ...oldFacing, };
-
-	if (ninetyDegreeRotationCount > 0) {
-		for (
-			let rotations = 0;
-			rotations < ninetyDegreeRotationCount;
-			rotations++
-		) {
-			const { north: oldNorth, east: oldEast, } = facing;
-			facing.north = -oldEast;
-			facing.east = oldNorth;
-		}
-	} else if (ninetyDegreeRotationCount < 0) {
-		for (
-			let rotations = 0;
-			rotations > ninetyDegreeRotationCount;
-			rotations--
-		) {
-			const { north: oldNorth, east: oldEast, } = facing;
-			facing.north = oldEast;
-			facing.east = -oldNorth;
-		}
-	}
-
-	return facing;
 };
 
 const stars: Stars = {
