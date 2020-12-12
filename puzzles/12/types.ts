@@ -18,7 +18,7 @@ export type Coordinates = {
 	east: number;
 }
 
-export type ShipStatus = {
-	coordinates: Coordinates,
-	facing: Coordinates,
+export type ShipVectors = {
+	position: Coordinates,
+	direction: Coordinates,
 }

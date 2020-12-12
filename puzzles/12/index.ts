@@ -1,5 +1,5 @@
 import { PuzzleSolver, Stars } from '../../types';
-import { Instruction, Action, ShipStatus } from './types';
+import { Instruction, Action, ShipVectors } from './types';
 
 import readPuzzleInput from '../common/read-puzzle-input';
 import parseInstructions from './parse-instructions';
@@ -9,41 +9,41 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
 	const instructions: Instruction[] = parseInstructions(puzzleInput);
 
-	const { coordinates:{ north, east, }, } = instructions.reduce((
-		shipStatus,
+	const { position:{ north, east, }, } = instructions.reduce((
+		shipVectors,
 		{ action, value, }: Instruction
-	): ShipStatus => {
+	): ShipVectors => {
 		switch (action) {
 		case Action.MoveNorth:
-			shipStatus.coordinates.north += value;
+			shipVectors.position.north += value;
 			break;
 		case Action.MoveSouth:
-			shipStatus.coordinates.north -= value;
+			shipVectors.position.north -= value;
 			break;
 		case Action.MoveEast:
-			shipStatus.coordinates.east += value;
+			shipVectors.position.east += value;
 			break;
 		case Action.MoveWest:
-			shipStatus.coordinates.east -= value;
+			shipVectors.position.east -= value;
 			break;
 		case Action.TurnLeft:
-			shipStatus.facing = rotate(-value, shipStatus.facing);
+			shipVectors.direction = rotate(-value, shipVectors.direction);
 			break;
 		case Action.TurnRight:
-			shipStatus.facing = rotate(value, shipStatus.facing);
+			shipVectors.direction = rotate(value, shipVectors.direction);
 			break;
 		case Action.MoveForward:
-			shipStatus.coordinates.north += value * shipStatus.facing.north;
-			shipStatus.coordinates.east += value * shipStatus.facing.east;
+			shipVectors.position.north += value * shipVectors.direction.north;
+			shipVectors.position.east += value * shipVectors.direction.east;
 			break;
 		}
 
-		return shipStatus;
+		return shipVectors;
 	}, {
-		coordinates: {
+		position: {
 			north: 0,
 			east: 0, },
-		facing: {
+		direction: {
 			north: 0,
 			east: 1,
 		},
@@ -53,7 +53,50 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
-	throw new Error('todo');
+	const puzzleInput = readPuzzleInput(__dirname);
+	const instructions: Instruction[] = parseInstructions(puzzleInput);
+
+	const { position:{ north, east, }, } = instructions.reduce((
+		shipVectors,
+		{ action, value, }: Instruction
+	): ShipVectors => {
+		switch (action) {
+		case Action.MoveNorth:
+			shipVectors.direction.north += value;
+			break;
+		case Action.MoveSouth:
+			shipVectors.direction.north -= value;
+			break;
+		case Action.MoveEast:
+			shipVectors.direction.east += value;
+			break;
+		case Action.MoveWest:
+			shipVectors.direction.east -= value;
+			break;
+		case Action.TurnLeft:
+			shipVectors.direction = rotate(-value, shipVectors.direction);
+			break;
+		case Action.TurnRight:
+			shipVectors.direction = rotate(value, shipVectors.direction);
+			break;
+		case Action.MoveForward:
+			shipVectors.position.north += value * shipVectors.direction.north;
+			shipVectors.position.east += value * shipVectors.direction.east;
+			break;
+		}
+
+		return shipVectors;
+	}, {
+		position: {
+			north: 0,
+			east: 0, },
+		direction: {
+			north: 1,
+			east: 10,
+		},
+	});
+
+	return (Math.abs(north) + Math.abs(east)).toString();
 };
 
 const stars: Stars = {
