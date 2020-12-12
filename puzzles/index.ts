@@ -11,6 +11,7 @@ import day08 from './08';
 import day09 from './09';
 import day10 from './10';
 import day11 from './11';
+import day12 from './12';
 
 const year: Year = {
 	'1': {
@@ -56,6 +57,10 @@ const year: Year = {
 	'11': {
 		title: 'Day 11: Seating System',
 		stars: day11,
+	},
+	'12': {
+		title: 'Day 12: Rain Risk',
+		stars: day12,
 	},
 };
 
