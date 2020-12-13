@@ -49,8 +49,48 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
-	throw new Error('TODO');
+	const puzzleInput = readPuzzleInput(__dirname);
+	const rawBusIds = puzzleInput.trim().split('\n')[1];
+	const busses: {multiple: number, offset: number}[] =
+		guaranteeDefined(rawBusIds)
+			.trim()
+			.split(',')
+			.map((rawBusId, index) => ({ rawBusId, offset: index, }))
+			.filter(({ rawBusId, }) => (rawBusId !== 'x'))
+			.map(({ rawBusId, offset, }) => (
+				{ multiple: parseInt(guaranteeDefined(rawBusId)), offset, }
+			));
+
+	const solution = { ...guaranteeDefined(busses[0]), };
+	for (let i = 1; i < busses.length; i++) {
+		const bus = guaranteeDefined(busses[i]);
+		for (
+			let timestamp = solution.offset;
+			;
+			timestamp += solution.multiple
+		) {
+			if (
+				isValidTimestamp(timestamp, guaranteeDefined(busses[i]))
+			) {
+				const newMultiple = solution.multiple * bus.multiple;
+				solution.multiple = newMultiple;
+				const newOffset = timestamp % newMultiple;
+				solution.offset = newOffset;
+
+				break;
+			}
+		}
+	}
+
+	return (solution.multiple - solution.offset).toString();
 };
+
+const isValidTimestamp = (
+	timestamp: number,
+	{ multiple, offset, }: {multiple: number, offset: number}
+): boolean => (
+	(timestamp % multiple) === (offset % multiple)
+);
 
 const stars: Stars = {
 	'1': solveFirstPuzzle,
