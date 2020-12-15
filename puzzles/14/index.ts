@@ -244,8 +244,6 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 		.values(memory)
 		.reduce((total, value) => (total + value), 0)
 		.toString();
-
-	throw new Error('TODO');
 };
 
 const stars: Stars = {
