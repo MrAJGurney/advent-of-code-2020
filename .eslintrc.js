@@ -1,8 +1,3 @@
-const underscoreOnlyPattern = '^_$';
-// '^': Start of line
-// '_': Underscore character
-// '$': End of line
-
 const configuration = {
 	root: true,
 	parser: '@typescript-eslint/parser',
@@ -56,9 +51,7 @@ const rules = {
 		},
 	],
 	'no-unused-vars': 'off',
-	'@typescript-eslint/no-unused-vars': [
-		'error', { varsIgnorePattern: underscoreOnlyPattern, },
-	],
+	'@typescript-eslint/no-unused-vars': ['error', ],
 	'no-var': ['error', ],
 	'object-curly-spacing': ['error', 'always', ],
 	'prefer-const': ['error', ],
