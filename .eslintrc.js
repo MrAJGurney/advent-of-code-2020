@@ -37,6 +37,7 @@ const rules = {
 		},
 	],
 	indent: ['error', 'tab', ],
+	'key-spacing': ['error', ],
 	'linebreak-style': ['error', 'unix', ],
 	'max-len': ['error', { code: 80, }, ],
 	'no-console': ['error', ],
