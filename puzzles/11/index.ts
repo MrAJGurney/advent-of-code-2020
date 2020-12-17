@@ -198,6 +198,7 @@ const findVisibleOccupiedSeatCount = (
 	seatRows: SeatMapKey[][]
 ): number => {
 	const directionVectorsToCheck: Coordinates[] = [
+		/* eslint-disable key-spacing */
 		{ column: - 1, row: - 1, },
 		{ column:   0, row: - 1, },
 		{ column: + 1, row: - 1, },
@@ -206,6 +207,7 @@ const findVisibleOccupiedSeatCount = (
 		{ column:   0, row: + 1, },
 		{ column: - 1, row: + 1, },
 		{ column: - 1, row:   0, },
+		/* eslint-enable key-spacing */
 	];
 
 	const rowCount = seatRows.length;

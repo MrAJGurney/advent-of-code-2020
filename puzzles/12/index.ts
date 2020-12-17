@@ -9,7 +9,7 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
 	const instructions: Instruction[] = parseInstructions(puzzleInput);
 
-	const { position:{ north, east, }, } = instructions.reduce((
+	const { position: { north, east, }, } = instructions.reduce((
 		shipVectors,
 		{ action, value, }: Instruction
 	): ShipVectors => {
@@ -56,7 +56,7 @@ const solveSecondPuzzle: PuzzleSolver = () => {
 	const puzzleInput = readPuzzleInput(__dirname);
 	const instructions: Instruction[] = parseInstructions(puzzleInput);
 
-	const { position:{ north, east, }, } = instructions.reduce((
+	const { position: { north, east, }, } = instructions.reduce((
 		shipVectors,
 		{ action, value, }: Instruction
 	): ShipVectors => {
