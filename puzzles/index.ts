@@ -17,6 +17,7 @@ import day14 from './14';
 import day15 from './15';
 import day16 from './16';
 import day17 from './17';
+import day18 from './18';
 
 const year: Year = {
 	'1': {
@@ -84,8 +85,12 @@ const year: Year = {
 		stars: day16,
 	},
 	'17': {
-		title: 'Day 17: Conway Cubes ',
+		title: 'Day 17: Conway Cubes',
 		stars: day17,
+	},
+	'18': {
+		title: 'Day 18: Operation Order',
+		stars: day18,
 	},
 };
 
