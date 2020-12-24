@@ -77,8 +77,12 @@ const solveFirstPuzzle: PuzzleSolver = () => {
 };
 
 const solveSecondPuzzle: PuzzleSolver = () => {
+	/* eslint-disable max-len */
+
 	// After multiple failed attempts at part 2, I based a solution on this:
 	// https://medium.com/@stoopidguy1992/how-to-write-a-math-expression-parser-in-javascript-b5147bc9466b
+
+	/* eslint-enable max-len */
 
 	const splitExpression = (
 		sourceExpression: string,
