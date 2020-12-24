@@ -20,6 +20,7 @@ import day17 from './17';
 import day18 from './18';
 import day19 from './19';
 import day20 from './20';
+import day21 from './21';
 import day22 from './22';
 import day23 from './23';
 import day24 from './24';
@@ -104,6 +105,10 @@ const year: Year = {
 	'20': {
 		title: 'Day 20: Jurassic Jigsaw',
 		stars: day20,
+	},
+	'21': {
+		title: 'Day 21: Allergen Assessment',
+		stars: day21,
 	},
 	'22': {
 		title: 'Day 22: Crab Combat',
