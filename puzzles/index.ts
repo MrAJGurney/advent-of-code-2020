@@ -24,6 +24,7 @@ import day21 from './21';
 import day22 from './22';
 import day23 from './23';
 import day24 from './24';
+import day25 from './25';
 
 const year: Year = {
 	'1': {
@@ -121,6 +122,10 @@ const year: Year = {
 	'24': {
 		title: 'Day 24: Lobby Layout',
 		stars: day24,
+	},
+	'25': {
+		title: 'Day 25: Combo Breaker',
+		stars: day25,
 	},
 };
 
